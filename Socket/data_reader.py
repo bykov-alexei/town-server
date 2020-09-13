@@ -1,3 +1,4 @@
+import pymongo
 from pymongo import MongoClient
 
 
@@ -7,7 +8,7 @@ def connect():
 
 def get_town(token):
     conn = connect()
-    town = conn.towns.find_one({'token': str(token)})
+    town = conn.towns.find({'token': str(token)}).sort([('i', pymongo.DESCENDING)])[0]
     return town
     
 

@@ -29,4 +29,4 @@ class Wander(Action):
         
         
     def get_weight(self, person):
-        return 0.1
+        return 100

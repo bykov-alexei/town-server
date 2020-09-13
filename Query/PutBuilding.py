@@ -22,5 +22,6 @@ class PutBuilding(Query):
             building = Building.Work(x, y)
         elif self.building['type'] == 'entertainment':
             building = Building.Entertainment(x, y)
+        town.money -= building.construction_cost
         town.buildings.append(building)
         

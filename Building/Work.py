@@ -1,4 +1,5 @@
 from Config.field import FIELD_CONFIG
+from Config.building import BUILDING_CONFIG
 
 from . import Building
 
@@ -9,7 +10,11 @@ class Work(Building):
         super(Work, self).__init__(x, y)
         
         self.type = 'work'
-        self.capacity = 30
+        self.work_places = BUILDING_CONFIG[self.type]['work_places']
+        self.construction_cost = BUILDING_CONFIG[self.type]['construction_cost']
+        self.maintenance_cost = BUILDING_CONFIG[self.type]['maintenance_cost']
+        self.income = BUILDING_CONFIG[self.type]['income']
+        
         self.taken_places = 0
         
     

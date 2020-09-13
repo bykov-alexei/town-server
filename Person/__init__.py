@@ -1,9 +1,11 @@
 from Config.field import FIELD_CONFIG
 from Config.game import GAME_CONFIG
 
-from random import choices
+from random import choices, randint
 import numpy as np
 
+
+from Action import GoHome
 
 class Person:
 
@@ -22,15 +24,28 @@ class Person:
         
         self.interests = choices(GAME_CONFIG['interests'], k=GAME_CONFIG['n_interests'])
         self.needs = GAME_CONFIG['needs']
+        self.happiness = 50
+        self.happiness_penalties = {
+            'work': 0,
+            'home': 0,
+        }
+
+        self.delta_vector = {}
         self.state_vector = {}
         for interest in self.interests:
-            self.state_vector[interest] = 1
+            self.delta_vector[interest] = 1
+            self.state_vector[interest] = 0
         for need in self.needs:
-            self.state_vector[need] = 1
+            self.delta_vector[need] = 1
+            self.state_vector[need] = 0
             
         
     def step(self):
+        if type(self.action) == GoHome:
+            print(self.action)
+
         self.increase_state()
+        self.calc_happiness()
 
         self.choose_action()
         self.action.do(self)
@@ -38,8 +53,18 @@ class Person:
    
     def increase_state(self):
         for key, item in self.state_vector.items():
-            self.state_vector[key] += item       
-        
+            if key in self.needs or key in self.interests:
+                self.state_vector[key] += (0.1 * self.delta_vector[key])
+
+
+    def calc_happiness(self):
+        happiness = 0
+        if self.home is not None:
+            happiness += 30
+        if self.work_place is not None:
+            happiness += 15
+        self.happiness = happiness
+
     
     def choose_action(self):
         if self.action is None:
@@ -62,5 +87,6 @@ class Person:
             'id': self.id,
             'position': [int(self.position[0]), int(self.position[1])],
             'velocity': [int(self.velocity[0]), int(self.velocity[1])],
+            'happiness': self.happiness,
         }
         return obj

@@ -1,4 +1,5 @@
 from Config.field import FIELD_CONFIG
+from Config.building import BUILDING_CONFIG
 
 
 class Building:
@@ -9,6 +10,9 @@ class Building:
                               y * FIELD_CONFIG['max_y'] // FIELD_CONFIG['max_building_y']]
         
         self.type = ''
+        self.income = BUILDING_CONFIG['default']['income']
+        self.construction_cost = BUILDING_CONFIG['default']['construction_cost']
+        self.maintenance_cost = BUILDING_CONFIG['default']['maintenance_cost']
         
     
     def step(self):

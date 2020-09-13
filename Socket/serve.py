@@ -26,7 +26,6 @@ class Handler(socketserver.BaseRequestHandler):
         elif self.data['action'] == 'get_stats':
             self.response = json.dumps(get_stats(self.data['token']))
         elif self.data['action'] == 'put_building':
-            print(self.data)
             db = MongoClient().new_game.put_building.insert_one(self.data)
             self.response = json.dumps({})
         elif self.data['action'] == 'delete_building':
