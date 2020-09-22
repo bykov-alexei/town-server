@@ -6,8 +6,8 @@ class Building:
 
     def __init__(self, x, y):
         self.position = [x, y]
-        self.common_position = [x * FIELD_CONFIG['max_x'] // FIELD_CONFIG['max_building_x'], 
-                              y * FIELD_CONFIG['max_y'] // FIELD_CONFIG['max_building_y']]
+        self.common_position = [(x + 0.5) * FIELD_CONFIG['max_x'] // FIELD_CONFIG['max_building_x'], 
+                              (y + 0.5) * FIELD_CONFIG['max_y'] // FIELD_CONFIG['max_building_y']]
         
         self.type = ''
         self.income = BUILDING_CONFIG['default']['income']

@@ -4,6 +4,9 @@ BUILDING_CONFIG = {
         'maintenance_cost': 0.5,
         'income': 0,
         'capacity': 15,
+
+        'happiness_delta': 30,
+        'min_happiness': 10,
     },
     'work': {
         'construction_cost': 15,

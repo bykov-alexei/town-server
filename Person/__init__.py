@@ -25,10 +25,6 @@ class Person:
         self.interests = choices(GAME_CONFIG['interests'], k=GAME_CONFIG['n_interests'])
         self.needs = GAME_CONFIG['needs']
         self.happiness = 50
-        self.penalties = {
-            'work': 0,
-            'home': 0,
-        }
 
         self.delta_vector = {}
         self.state_vector = {}
@@ -60,13 +56,7 @@ class Person:
     def calc_happiness(self):
         happiness = 0
         if self.home is not None:
-            happiness += 30
-        if self.work_place is not None:
-            happiness += 15
-        for key, value in self.penalties.items():
-            if value < 0:
-                self.penalties[key] = 0
-            happiness -= self.penalties[key]
+            happiness += self.home.happiness(self)
         self.happiness = happiness
 
     

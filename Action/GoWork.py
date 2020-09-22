@@ -19,11 +19,7 @@ class GoWork(Action):
     def do(self, person):
         super().do(person)
         if person.work_place is None:
-            person.penalties['work'] += 0.1
             return
-
-        if self.get_minutes() > 60:
-            person.penalties['work'] -= 1
 
         self.destination = person.work_place.common_position
     

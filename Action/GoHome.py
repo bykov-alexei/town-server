@@ -19,7 +19,6 @@ class GoHome(Action):
     def do(self, person):
         super().do(person)
         if person.home is None:
-            person.penalties['home'] += 0.1
             return
         self.destination = person.home.common_position
     
