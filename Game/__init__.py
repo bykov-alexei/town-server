@@ -33,8 +33,6 @@ class Game:
         self.do_queries()
         for town in self.towns.values():
             town.step()
-        for person in self.people:
-            person.step()
         self.save_state()
         
         end = time.time()

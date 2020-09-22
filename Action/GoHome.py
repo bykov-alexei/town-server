@@ -11,11 +11,16 @@ from math import atan2, cos, sin
 class GoHome(Action):
     
     def __init__(self):
+        super().__init__()
         self.name = "Go home"
         self.destination = None
 
 
     def do(self, person):
+        super().do(person)
+        if person.home is None:
+            person.penalties['home'] += 0.1
+            return
         self.destination = person.home.common_position
     
         angle = atan2(self.destination[1] - person.position[1], self.destination[0] - person.position[0])

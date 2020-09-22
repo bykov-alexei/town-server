@@ -11,12 +11,14 @@ from math import atan2, cos, sin
 class GoSomewhere(Action):
     
     def __init__(self, building):
+        super(GoSomewhere).__init__()
         self.name = "Go home"
         self.building = building
         self.destination = building.common_position
 
 
     def do(self, person):
+        super(GoSomewhere).do(person)
         angle = atan2(self.destination[1] - person.position[1], self.destination[0] - person.position[0])
         distance = np.sqrt(np.sum((self.destination - person.position) ** 2))
         speed = PERSON_CONFIG['default_speed']

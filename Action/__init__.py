@@ -1,3 +1,6 @@
+from Config.game import GAME_CONFIG
+
+
 class Action:
 
 
@@ -7,7 +10,7 @@ class Action:
  
  
     def do(self, person):
-        
+        self.time += 1
         pass
         
         
@@ -17,6 +20,10 @@ class Action:
 
     def get_weight(self, person):
         return 1
+
+    def get_minutes(self):
+        delta = 60 * 24 // GAME_CONFIG['steps_in_day']
+        return self.time * delta
         
 
 from .Wander import Wander

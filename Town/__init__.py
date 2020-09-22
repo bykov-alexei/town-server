@@ -26,9 +26,6 @@ class Town:
         
         self.money = 0
         
-        for person in self.people:
-            self.find_home(person)
-        
         
     def step(self):
         # Time
@@ -46,12 +43,27 @@ class Town:
 
         # Settlement
         for person in self.people:
+            self.schedule(person)
+            person.step()
             self.find_home(person)
             self.find_work(person)
     
         # Building steps
         for building in self.buildings:
             building.step()
+
+    def schedule(self, person):
+        date = self.get_date()
+        if date.hour >= 0 and date.hour <= 8:
+            if type(person.action) != GoHome:
+                person.action = GoHome()
+        elif date.hour >= 8 and date.hour <= 12:
+            if type(person.action) != GoWork:
+                person.action = GoWork()
+        elif date.hour >= 13 and date.hour <= 17:
+            if type(person.action) != GoWork:
+                person.action = GoWork()
+        return
     
     def calc_attraction(self):
         happinesses = []

@@ -25,7 +25,7 @@ class Person:
         self.interests = choices(GAME_CONFIG['interests'], k=GAME_CONFIG['n_interests'])
         self.needs = GAME_CONFIG['needs']
         self.happiness = 50
-        self.happiness_penalties = {
+        self.penalties = {
             'work': 0,
             'home': 0,
         }
@@ -63,6 +63,10 @@ class Person:
             happiness += 30
         if self.work_place is not None:
             happiness += 15
+        for key, value in self.penalties.items():
+            if value < 0:
+                self.penalties[key] = 0
+            happiness -= self.penalties[key]
         self.happiness = happiness
 
     
